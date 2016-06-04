@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SpringMvc Ajax Jsonp跨域</title>
+<script src="/resources/js/jquery-1.12.4.js"></script>
+<script>
+	/* document.domain = "lyle.com";  */ 
+	function A(){
+		alert("我来自A网站");
+	}
+
+	function callB(){
+		/**
+			soga是iframe的name属性。因为在FireFox下id不能获取iframe对象 
+		*/
+		soga.window.B();
+	}
+
+
+	$(function() {
+		$("#first").click(function() {
+			$.ajax({
+				url : '/assembly.htm',
+				type : "get",
+				async : true,//如果是false  Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org
+				dataType : "jsonp",
+				jsonp : "isCallBack",
+				jsonpCallback : "callbackFunctionName",
+				success : function(json) {
+					console.log(json.name);
+				},
+				error : function(xhr, status, error) {
+					alert("oh shit");
+				}
+			});
+		});
+
+		$("#second").click(function() {
+			$.ajax({
+				url : '/jsonp.htm',
+				type : "get",
+				dataType : "jsonp",
+				jsonp : "isCallBack",
+				jsonpCallback : "callbackFunctionName",
+				success : function(json) {
+					console.log(json.name + "--" + json.sex + "--" + json.age + "--" + json.kongfu);
+				},
+				error : function(xhr, status, error) {
+					alert("oh shit");
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+
+	<div id="cross_origin">
+		<h2>一、jquery ajax后台两种方式跨域</h2>
+	</div>
+	<button id="first">response.getWriter()</button>
+	<br>
+	<br>
+	<button id="second">JSONPObject</button>
+	<br>
+	<br>
+	<h2>二、document domain,这是a网站</h2>
+	<h3>对于主域相同而子域不同，可以使用document.domain.主域名是不带www的域名</h3>
+	<!-- 
+		1.修改hosts文件	127.0.0.1 a.lyle.com
+						127.0.0.1 b.lyle.com
+		2.使用index.html和Another.html
+	 -->
+
+	<input type="button" name="callB"  value="callB" onclick="callB()"/>  
+	<iframe name="soga" src="http://b.lyle.com:8080/another.html"></iframe>
+
+</body>
+</html>
