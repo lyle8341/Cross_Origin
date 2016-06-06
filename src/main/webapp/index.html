@@ -5,19 +5,6 @@
 <title>SpringMvc Ajax Jsonp跨域</title>
 <script src="/resources/js/jquery-1.12.4.js"></script>
 <script>
-	/* document.domain = "lyle.com";  */ 
-	function A(){
-		alert("我来自A网站");
-	}
-
-	function callB(){
-		/**
-			soga是iframe的name属性。因为在FireFox下id不能获取iframe对象 
-		*/
-		soga.window.B();
-	}
-
-
 	$(function() {
 		$("#first").click(function() {
 			$.ajax({
@@ -52,6 +39,20 @@
 			});
 		});
 	});
+	
+	
+	
+	document.domain = "lyle.com";
+	function A(){
+		alert("我来自A网站");
+	}
+
+	function callB(){
+		/**
+			soga是iframe的name属性。因为在FireFox下id不能获取iframe对象 
+		*/
+		soga.window.B();
+	}
 </script>
 </head>
 <body>

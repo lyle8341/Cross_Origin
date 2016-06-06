@@ -5,13 +5,13 @@
 <title>this is b website</title>
 <script src="/resources/js/jquery-1.12.4.js"></script>
 	<script>
-	/* document.domain = "lyle.com";  */
+	document.domain = "lyle.com";
 		function B(){
 			alert("我来自B网站");
 		}
 		
 		function callA(){
-			
+			good.window.A();
 		}
 	</script>
 
@@ -20,6 +20,6 @@
 <h1>这是b网站</h1>
 
 <input type="button" name="callA" value="callA" onclick="callA()"/>  
-<!-- <iframe name="soga" src="http://a.lyle.com:8080"></iframe> -->
+<iframe name="good" src="http://a.lyle.com:8080"></iframe>
 </body>
 </html>
