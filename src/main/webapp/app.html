@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>A网站应用程序页面</title>
+
+</head>
+<body>
+<h1>A网站</h1>
+<script type="text/javascript">
+    var state = 0, 
+    iframe = document.createElement('iframe'),
+    loadfn = function() {
+        if (state === 1) {
+            var data = iframe.contentWindow.name;    // 读取数据
+            //销毁iframe
+            iframe.contentWindow.document.write('');
+            iframe.contentWindow.close();
+            document.body.removeChild(iframe);
+            //
+            alert(data);
+        } else if (state === 0) {
+            state = 1;
+            iframe.contentWindow.location = "http://a.lyle.com:8080/proxy.html";    // 设置的代理文件
+        }  
+    };
+    iframe.src = 'http://b.lyle.com:8080/data.html';
+    if (iframe.attachEvent) {
+        iframe.attachEvent('onload', loadfn);
+    } else {
+        iframe.onload  = loadfn;
+    }
+    document.body.appendChild(iframe);
+</script>
+
+</body>
+</html>
