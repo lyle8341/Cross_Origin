@@ -6,6 +6,11 @@
 <script src="/resources/js/jquery-1.12.4.js"></script>
 <script>
 	$(function() {
+		
+		/*
+		http://a.lyle.com:8080/assembly.htm?isCallBack=callbackFunctionName&_=1465264577118
+		response:callbackFunctionName({"career":"geek","name":"乔布斯"})
+		*/
 		$("#first").click(function() {
 			$.ajax({
 				url : '/assembly.htm',
@@ -23,6 +28,10 @@
 			});
 		});
 
+		/*
+		http://a.lyle.com:8080/jsonp.htm?isCallBack=callbackFunctionName&_=1465264824118
+		callbackFunctionName({"sex":"男","age":100,"name":"张三丰","kongfu":"太极拳"})	
+		*/
 		$("#second").click(function() {
 			$.ajax({
 				url : '/jsonp.htm',
@@ -41,7 +50,9 @@
 	});
 	
 	
-	
+	/*
+		document.domain	
+	*/
 	document.domain = "lyle.com";
 	function A(){
 		alert("我来自A网站");
@@ -49,7 +60,7 @@
 
 	function callB(){
 		/**
-			soga是iframe的name属性。因为在FireFox下id不能获取iframe对象 
+		  soga是iframe的name属性。因为在FireFox下id不能获取iframe对象 
 		*/
 		soga.window.B();
 	}
@@ -71,11 +82,18 @@
 	<!-- 
 		1.修改hosts文件	127.0.0.1 a.lyle.com
 						127.0.0.1 b.lyle.com
-		2.使用index.html和Another.html
+		2.使用index.html和another.html
+		3.配置见页面
+		4.启动，访问a.lyle.com:8080
+		5.在index页面操作，看效果
 	 -->
-
 	<input type="button" name="callB"  value="callB" onclick="callB()"/>  
-	<iframe name="soga" src="http://b.lyle.com:8080/another.html"></iframe>
+	<!-- <iframe name="soga" src="http://b.lyle.com:8080/another.html"></iframe> -->
+	
+	<!-- 不同端口时候document.domain也能跨域 ???
+		在9090端口在启动项目，让8080端口的index访问9090的another页面
+	-->
+	<iframe name="soga" src="http://b.lyle.com:9090/another.html"></iframe>
 
 </body>
 </html>

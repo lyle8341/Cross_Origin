@@ -52,6 +52,5 @@ public class JsonpController {
 		map.put("age", 100);
 		map.put("sex", "男");
 		return new JSONPObject(isCallBack, map);
-		
 	}
 }
